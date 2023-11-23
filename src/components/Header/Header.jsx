@@ -5,7 +5,7 @@ import { PiUserCircleFill } from "react-icons/pi";
 const NavBar = () => {
     return (
         <>
-            <nav className="flex justify-between items-center">
+            <nav className="flex justify-between items-center p-4">
                 <div className="flex items-baseline">
                     <img src={logo} alt="app logo" />
                     <h1 className="text-4xl font-bold">Health AI</h1>
