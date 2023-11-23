@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
-    const [isView, setIsView] = useState(true);
+    const [isView, setIsView] = useState(false);
 
     const viewPassword = () => {
         setIsView(!isView)
@@ -46,11 +46,19 @@ const Login = () => {
                         <div className="mt-16">
                             <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282]">
                                 <AiOutlineMail />
-                                <input type="email" name="email" className="w-[90%] ps-2 outline-0"/>
+                                <input type="email" 
+                                    name="email" 
+                                    placeholder="Email"
+                                    className="w-[90%] ps-2 outline-0"
+                                />
                             </div>
                             <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282]">
                                 <AiOutlineLock />
-                                <input type="password" name="password" className="w-[90%] ps-2 outline-0"/>
+                                <input type="password" 
+                                    name="password" 
+                                    placeholder="Password"
+                                    className="w-[90%] ps-2 outline-0"
+                                />
                                 {isView 
                                     ? <AiOutlineEye className="cursor-pointer" onClick={()=>viewPassword()}/> 
                                     : <AiOutlineEyeInvisible className="cursor-pointer" onClick={()=>viewPassword()}/>
@@ -78,7 +86,7 @@ const Login = () => {
                             <p>Sign in with Facebook</p>
                         </div>
                     </div>
-                    <p className="text-2xl text-[#828282] mt-8">Have no account yet? <Link to={'/'} className="text-[#6F74DD]">Register</Link></p>
+                    <p className="text-2xl text-[#828282] mt-8">Have no account yet? <Link to={'/signup'} className="text-[#6F74DD]">Register</Link></p>
                 </div>
             </section>
         </main>
