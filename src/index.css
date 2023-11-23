@@ -29,3 +29,8 @@ html {
   height: 100dvh;
   font-family: Helvetica;
 }
+
+#root {
+  padding: 0;
+  max-width: 100dvw;
+}

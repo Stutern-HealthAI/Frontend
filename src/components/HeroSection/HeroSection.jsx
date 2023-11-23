@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
     return (
-        <section className="flex p-1 h-[85vh]">
+        <section className="flex p-2 h-[85vh]">
             <div className="w-2/3 flex justify-center items-center">
                 <img src={heroImage} alt="hero image" className="h-full w-full"/>
             </div>
