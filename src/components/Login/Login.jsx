@@ -1,48 +1,99 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import bgdatom from '../../assets/abstract-bgd-atom.png'
 import bgdweb from '../../assets/abstract-bgd-img.png'
-import logo from '../../assets/healthAI-logo.svg'
+import loginVector from '../../assets/healthDocVector.svg'
+import circle1 from '../../assets/circle1.png'
+import circle2 from '../../assets/circle2.png'
 import { 
     AiOutlineMail,
     AiOutlineLock,
     AiOutlineEye,
     AiOutlineEyeInvisible 
 } from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { AuthContext } from '../../hooks/context';
+import GoogleAndFacebook from '../common/GoogleAndFacebook';
+import AppLogo from '../common/AppLogo';
 
 
 const Login = () => {
-    const [isView, setIsView] = useState(false);
+    const [showText, setShowText] = useState(false)
+    const {
+        email,
+        password,
+        viewPassword,
+        getEmailValue,
+        getPasswordValue,
+        isView
+    } = useContext(AuthContext)
 
-    const viewPassword = () => {
-        setIsView(!isView)
+
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const {data} = await axios.post('https://klus-hc.onrender.com/api/v1/users/login', {
+                email: email,
+                password: password
+            })
+                console.log(data)
+            // Handle the response 
+            if (data.success === true) {
+                console.log("login successful");
+                // Perform actions after successful login
+                navigate('/newchat')
+                setShowText(false)
+            } else {
+                console.log("Invalid credentials")
+                setShowText(true)
+            }
+            
+        } catch (err) {
+            console.log(err.message)
+            setShowText(true)
+        
+        }
+        
     }
+
+    const navigate = useNavigate()
+    
 
     return (
         <main className="bg-no-repeat bg-cover h-screen bg-center" 
             style={{backgroundImage: `url(${bgdatom})`}}
         >
-            <h2 className="text-6xl text-white p-8 font-semibold">Sign In</h2>
+            <AppLogo />
+            
+            {/* <h2 className="text-6xl text-white p-8 font-semibold">Sign In</h2> */}
             <section className="m-auto border-0 h-4/5 w-4/5 backdrop-blur-md flex rounded-2xl"
                 style={{boxShadow: "0px 0px 6.2px 0px rgba(14, 85, 85, 0.60), 0px 48px 48px -6px rgba(14, 85, 85, 0.63), 0px 4px 11.4px 0px rgba(14, 85, 85, 0.25)"}}    
             >
-                <div className="w-3/5 bg-no-repeat bg-cover bg-center h-5/5 rounded-l-2xl text-white" 
+                <div className="w-3/5 bg-no-repeat bg-cover bg-center h-5/5 rounded-l-2xl text-white flex flex-col items-center gap-4" 
                     style={{backgroundImage: `url(${bgdatom})`}}    
                 >
-                    <div className="flex items-baseline ">
+                    {/* <div className="flex items-baseline ">
                         <img src={logo} alt="app logo" className=""/>
                         <h1 className="text-4xl font-bold">Health AI</h1>
-                    </div> 
-                    <img src={logo} alt="login vector image" />
-                    <p className="text-4xl">Welcome to Health AI Chat bot</p>
+                    </div>  */}
+                    <img src={loginVector} alt="login vector image" className="w-3/5 h-3/5" />
+                    <p className="text-4xl font-bold">Welcome to Health AI Chat bot</p>
                     <p className="text-2xl">Just of couple of clicks and we start</p>
-                    <div>000</div>
+                    <div className="flex gap-2 mt-8">
+                        <img src={circle1} alt="nav dots" className="w-8" />
+                        <img src={circle2} alt="nav dots" className="w-8" />
+                        <img src={circle2} alt="nav dots" className="w-8" />
+                    </div>
                 </div>
                 <div className="w-2/5 rounded-r-2xl bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center"
                     style={{backgroundImage: `url(${bgdweb})`}}        
                 >
-                    <form className="m-8 w-4/5">
+                    <form className="m-8 w-4/5" onSubmit={handleLoginSubmit}>
                         <h1 className="text-4xl text-[#343434] font-bold">Welcome</h1>
+                        {showText ? <p className="text-red-600 text-xl">Invalid Email or Password, try again!</p> : null}
+
                         <div className="mt-16">
                             <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282]">
                                 <AiOutlineMail />
@@ -50,22 +101,30 @@ const Login = () => {
                                     name="email" 
                                     placeholder="Email"
                                     className="w-[90%] ps-2 outline-0"
+                                    value={email}
+                                    onChange={getEmailValue}
                                 />
                             </div>
+
                             <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282]">
                                 <AiOutlineLock />
                                 <input type="password" 
                                     name="password" 
+                                    id="showPass"
                                     placeholder="Password"
                                     className="w-[90%] ps-2 outline-0"
+                                    value={password}
+                                    onChange={getPasswordValue}
                                 />
+
                                 {isView 
-                                    ? <AiOutlineEye className="cursor-pointer" onClick={()=>viewPassword()}/> 
-                                    : <AiOutlineEyeInvisible className="cursor-pointer" onClick={()=>viewPassword()}/>
+                                    ? <AiOutlineEye className="cursor-pointer" onClick={viewPassword}/> 
+                                    : <AiOutlineEyeInvisible className="cursor-pointer" onClick={viewPassword}/>
                                 }
+
                             </div>
                         </div>
-                        <p className="text-right text-[#6F74DD] text-2xl"><Link to={"/"}>Forgot Password?</Link></p>
+                        <p className="text-right text-[#6F74DD] text-2xl"><Link to={"/forgotpassword"}>Forgot Password?</Link></p>
                         <input 
                             type="submit" 
                             name="submit" 
@@ -73,18 +132,15 @@ const Login = () => {
                             className="border bg-[#579191] w-full p-3 rounded-xl text-white font-medium text-2xl mt-16 cursor-pointer"
                         />
                     </form>
+
                     <div className="flex items-center gap-2 text-2xl">
                         <hr className="bg-[#343434] w-24"/>
                         <p className="text-[#343434]">or</p>
                         <hr className="bg-[#343434] w-24"/>
                     </div>
+
                     <div className="flex justify-between w-4/5 mt-8">
-                        <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282] cursor-pointer">
-                            <p>Sign in with Google</p>
-                        </div>
-                        <div className="border rounded-xl flex items-center p-2 text-2xl mb-4 text-[#828282] cursor-pointer">
-                            <p>Sign in with Facebook</p>
-                        </div>
+                        <GoogleAndFacebook />
                     </div>
                     <p className="text-2xl text-[#828282] mt-8">Have no account yet? <Link to={'/signup'} className="text-[#6F74DD]">Register</Link></p>
                 </div>
