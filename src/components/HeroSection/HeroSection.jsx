@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import heroImage from '../../assets/hero-webtoon.svg'
 import logo from '../../assets/healthAI-logo.svg'
 import { Link } from "react-router-dom";
+import { AuthContext } from '../../hooks/context';
 
 const HeroSection = () => {
+
+    const { isLoggedIn } = useContext(AuthContext);
+
     return (
         <section className="flex p-2 h-[85vh]">
             <div className="w-2/3 flex justify-center items-center">
@@ -16,7 +20,7 @@ const HeroSection = () => {
                 </div>
                 <p className="text-3xl mt-8">Channel the power of AI towards your health</p>
                 <div className="flex justify-between w-full font-bold mt-16">
-                    <Link to="/login">
+                    <Link to={isLoggedIn ? "/newchat" :"/login"}>
                         <button className="rounded-lg border-0 bg-[#0F2424] text-white p-2 text-3xl w-60 h-16">
                             Chat now
                         </button>
