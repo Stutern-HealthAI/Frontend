@@ -7,7 +7,7 @@ const ContextProvider = (props) => {
     const [isView, setIsView] = useState(false);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [userFullName, setUserFullName] = useState(" ")
+    const [userFullName, setUserFullName] = useState("")
 
     // toggle password visibility
     const viewPassword = () => {

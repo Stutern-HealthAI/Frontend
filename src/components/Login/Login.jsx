@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import bgdatom from '../../assets/abstract-bgd-atom.png'
 import bgdweb from '../../assets/abstract-bgd-img.png'
 import loginVector from '../../assets/healthDocVector.svg'
@@ -25,9 +25,22 @@ const Login = () => {
         viewPassword,
         getEmailValue,
         getPasswordValue,
-        isView
+        isView,
+        setEmail,
+        setPassword
     } = useContext(AuthContext)
 
+    useEffect(() => {
+        if (showText === true) {
+            setTimeout(() => {
+                setShowText(false);
+                console.log("timeout executed")
+            }, 2000);
+        }
+    
+        
+        return;
+    }, [showText]); 
 
 
     const handleLoginSubmit = async (e) => {
@@ -44,16 +57,16 @@ const Login = () => {
                 console.log("login successful");
                 // Perform actions after successful login
                 navigate('/newchat')
-                setShowText(false)
-            } else {
-                console.log("Invalid credentials")
-                setShowText(true)
+                setEmail("")
+                setPassword("")
             }
             
         } catch (err) {
-            console.log(err.message)
+            // console.error('Error:', err)
+            console.error("Error: invalid credentials")
             setShowText(true)
-        
+            setEmail("")
+            setPassword("")
         }
         
     }
@@ -67,17 +80,13 @@ const Login = () => {
         >
             <AppLogo />
             
-            {/* <h2 className="text-6xl text-white p-8 font-semibold">Sign In</h2> */}
             <section className="m-auto border-0 h-4/5 w-4/5 backdrop-blur-md flex rounded-2xl"
                 style={{boxShadow: "0px 0px 6.2px 0px rgba(14, 85, 85, 0.60), 0px 48px 48px -6px rgba(14, 85, 85, 0.63), 0px 4px 11.4px 0px rgba(14, 85, 85, 0.25)"}}    
             >
                 <div className="w-3/5 bg-no-repeat bg-cover bg-center h-5/5 rounded-l-2xl text-white flex flex-col items-center gap-4" 
                     style={{backgroundImage: `url(${bgdatom})`}}    
                 >
-                    {/* <div className="flex items-baseline ">
-                        <img src={logo} alt="app logo" className=""/>
-                        <h1 className="text-4xl font-bold">Health AI</h1>
-                    </div>  */}
+        
                     <img src={loginVector} alt="login vector image" className="w-3/5 h-3/5" />
                     <p className="text-4xl font-bold">Welcome to Health AI Chat bot</p>
                     <p className="text-2xl">Just of couple of clicks and we start</p>

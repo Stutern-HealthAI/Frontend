@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import {
     AiOutlineEye,
     AiOutlineEyeInvisible 
@@ -18,9 +18,24 @@ function SignUpForm() {
         getPasswordValue,
         getFullNameValue,
         viewPassword,
-        isView
+        isView,
+        setEmail,
+        setPassword,
+        setUserFullName
 
     } = useContext(AuthContext)
+
+    useEffect(() => {
+        if (showText === true) {
+            setTimeout(() => {
+                setShowText(false);
+                console.log("timeout executed")
+            }, 3000);
+        }
+    
+        
+        return;
+    }, [showText]);
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
@@ -38,14 +53,17 @@ function SignUpForm() {
                 console.log("Sign up successful");
                 // Perform actions after successful login
                 navigate('/signup/verifyaccount')
-                setShowText(false)
-            } else {
-                console.log("user already exist")
-                setShowText(true)
+                setEmail("")
+                setPassword("")
+                setUserFullName("")
             }
             
         } catch (err) {
             console.log(err)
+            setShowText(true)
+            setEmail("")
+            setPassword("")
+            setUserFullName("")
         
         }
         
@@ -58,7 +76,7 @@ function SignUpForm() {
     <section className="w-2/5 m-auto">
         <h2 className="text-4xl font-bold">Create Account</h2>
 
-        {showText ? <p className="text-red-600 text-xl">User already as an account, Proceed to login</p> : null}
+        {showText ? <p className="text-red-600 text-xl">User already as an account, proceed to login</p> : null}
 
         <div className="flex justify-between my-12">
             <GoogleAndFacebook />
