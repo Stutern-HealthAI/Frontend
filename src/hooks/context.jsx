@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useState, useEffect } from "react"
 
 const AuthContext = createContext()
 
@@ -8,6 +8,30 @@ const ContextProvider = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [userFullName, setUserFullName] = useState("")
+    const [showUpgrade, setShowUpgrade] = useState(false)
+    const [endChat, setEndChat] = useState(false)
+
+
+    useEffect(() => {
+        if (showUpgrade === true) {
+            setTimeout(() => {
+                setShowUpgrade(false);
+                console.log("timeout executed")
+            }, 5000);
+        }
+
+        
+        return;
+    }, [showUpgrade]);
+
+    //end task
+    useEffect(() => {
+        if (endChat === true) {
+            setTimeout(() => {
+                setEndChat(false);
+            }, 5000)
+        }
+    }, [endChat])
 
     // toggle password visibility
     const viewPassword = () => {
@@ -36,6 +60,23 @@ const ContextProvider = (props) => {
         setPassword(e.target.value)
     }
 
+    //open side nav
+    const openSideNav = () => {
+        const sideBarElement = document.getElementById("sideBar");
+        if (sideBarElement) {
+            sideBarElement.style.width = "25%";
+        }
+    }
+
+    //close side nav
+    const closeSideNav = () => {
+        const sideBarElement = document.getElementById("sideBar");
+        if (sideBarElement) {
+            sideBarElement.style.width = "0";
+        }
+    }
+
+
     return (
         <AuthContext.Provider value={{
             isLoggedIn,
@@ -49,7 +90,13 @@ const ContextProvider = (props) => {
             password,
             userFullName,
             setUserFullName,
-            getFullNameValue
+            getFullNameValue,
+            openSideNav,
+            closeSideNav,
+            showUpgrade,
+            setShowUpgrade,
+            endChat,
+            setEndChat
         }}
         >
             {props.children}

@@ -9,9 +9,9 @@ const HeroSection = () => {
     const { isLoggedIn } = useContext(AuthContext);
 
     return (
-        <section className="flex p-2 h-[85vh]">
+        <section className="flex p-2 h-[100vh] pt-10 border border-red-500">
             <div className="w-2/3 flex justify-center items-center">
-                <img src={heroImage} alt="hero image" className="h-full w-full"/>
+                <img src={heroImage} alt="hero image" className="h-4/5 w-4/5"/>
             </div>
             <div className="h-full flex flex-col justify-center items-center text-[#0F2424]">
                 <div className="flex items-center">
