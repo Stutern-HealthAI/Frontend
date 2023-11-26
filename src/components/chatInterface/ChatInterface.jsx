@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState, useEffect } from 'react'
 import { IoCameraOutline, IoAttachSharp, IoMicOutline } from "react-icons/io5";
 import { IoMdMore } from "react-icons/io";
 import { IoChatbubblesOutline } from "react-icons/io5";
@@ -18,6 +18,19 @@ function ChatInterface() {
     const [query, setQuery] = useState("")
 
     const { showUpgrade, endChat } = useContext(AuthContext)
+
+    const chatBoxRef = useRef(null);
+
+    // Function to scroll the chatbox to the bottom
+    const scrollToBottom = () => {
+        if (chatBoxRef.current) {
+        chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom(); // Scroll to bottom when component mounts or query changes
+    }, [query]);
 
 
     const openChatModal = () => {
@@ -40,12 +53,14 @@ function ChatInterface() {
 
 
   return (
-    <section className="min-h-screen">
+    <section className="">
          <SideBar />
-        <div className="h-[85dvh] rounded-b-2xl relative pt-[8rem]">
+        <div className="h-[74dvh] rounded-b-2xl flex flex-col-reverse overflow-auto scroll-smooth">
 
-            <div className="w-[90%] mx-auto min-h-[5rem]">
-                <ChatBox style={{backgroundColor: "#079393"}} queryMessage={query} alias={"AI"} />
+            <div className="w-[90%] mx-auto min-h-[5rem]"
+                ref={chatBoxRef}
+            >
+                {query && <ChatBox style={{backgroundColor: "#079393"}} queryMessage={query} alias={"AI"} floatStyle={{float: "right"}}/>}
             </div>
         </div>
 

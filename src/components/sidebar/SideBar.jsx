@@ -28,7 +28,7 @@ function SideBar() {
             <img src={profilePhoto} alt="profile image" />
             <div className="text-white">
                 <h3 className="text-2xl">{userFullName}</h3>
-                <p className="text-xl">{email}</p>
+                <p className="text-2xl mt-4">{email}</p>
             </div>
         </div>
         <ul className="text-white m-8">
