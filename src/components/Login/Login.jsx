@@ -60,8 +60,6 @@ const Login = () => {
 
             console.log(token)
             setUserToken(token)
-           
-
             
                 console.log(data)
             // Handle the response 
