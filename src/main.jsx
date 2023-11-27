@@ -25,6 +25,10 @@ const route = createBrowserRouter([
         path: "/",
         element: <HomePage />
       },
+      {
+        path: "/newchat",
+        element: <NewChatPage />
+      }
     ]
   },
   {
@@ -61,10 +65,6 @@ const route = createBrowserRouter([
       }
     ]
   },
-  {
-    path: "/newchat",
-    element: <NewChatPage />
-  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

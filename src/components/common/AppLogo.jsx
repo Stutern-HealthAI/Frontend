@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom'
 function AppLogo() {
   return (
     <>
-        <Link to={'/'}>
-            <div className="flex items-baseline p-8 text-white cursor-pointer">
-                <img src={logo} alt="app logo" className=""/>
-                <h1 className="text-4xl font-bold ">Health AI</h1>
-            </div>
-        </Link>
+        <div className="flex items-baseline p-8 text-white ">
+            <Link to={'/'}>
+                <img src={logo} alt="app logo" className="cursor-pointer"/>
+            </Link>
+            <Link  to={'/'}>
+                <h1 className="text-4xl font-bold cursor-pointer">Health AI</h1>
+            </Link>
+        </div>
     </>
   )
 }
