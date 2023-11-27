@@ -19,6 +19,7 @@ import AppLogo from '../common/AppLogo';
 
 const Login = () => {
     const [showText, setShowText] = useState(false)
+    
     const {
         email,
         password,
@@ -27,8 +28,11 @@ const Login = () => {
         getPasswordValue,
         isView,
         setEmail,
-        setPassword
+        setPassword,
+        setUserToken
     } = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (showText === true) {
@@ -51,6 +55,14 @@ const Login = () => {
                 email: email,
                 password: password
             })
+
+            const { token } = data.data
+
+            console.log(token)
+            setUserToken(token)
+           
+
+            
                 console.log(data)
             // Handle the response 
             if (data.success === true) {
@@ -71,7 +83,6 @@ const Login = () => {
         
     }
 
-    const navigate = useNavigate()
     
 
     return (

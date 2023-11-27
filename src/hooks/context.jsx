@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react"
+import axios from "axios"
 
 const AuthContext = createContext()
 
@@ -10,7 +11,8 @@ const ContextProvider = (props) => {
     const [userFullName, setUserFullName] = useState("")
     const [showUpgrade, setShowUpgrade] = useState(false)
     const [endChat, setEndChat] = useState(false)
-
+    const [userToken, setUserToken] = useState("")
+    const [threadId, setThreadId] = useState("")
 
     useEffect(() => {
         if (showUpgrade === true) {
@@ -89,6 +91,8 @@ const ContextProvider = (props) => {
             email,
             password,
             userFullName,
+            setEmail,
+            setPassword,
             setUserFullName,
             getFullNameValue,
             openSideNav,
@@ -96,7 +100,11 @@ const ContextProvider = (props) => {
             showUpgrade,
             setShowUpgrade,
             endChat,
-            setEndChat
+            setEndChat,
+            userToken,
+            setUserToken,
+            threadId,
+            setThreadId
         }}
         >
             {props.children}
