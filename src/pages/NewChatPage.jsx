@@ -1,8 +1,9 @@
 import React from 'react'
+import ChatInterface from '../components/chatInterface/ChatInterface'
 
 function NewChatPage() {
   return (
-    <div>NewChatPage</div>
+    <ChatInterface />
   )
 }
 
