@@ -26,6 +26,7 @@ const ContextProvider = (props) => {
         return;
     }, [showUpgrade]);
 
+
     //end task
     useEffect(() => {
         if (endChat === true) {
@@ -34,6 +35,7 @@ const ContextProvider = (props) => {
             }, 5000)
         }
     }, [endChat])
+
 
     // toggle password visibility
     const viewPassword = () => {
@@ -78,6 +80,23 @@ const ContextProvider = (props) => {
         }
     }
 
+    const createNewThread = async () => {
+        try {
+            const { data } = await axios.post('https://klus-hc.onrender.com/api/v1/threads', {}, {
+                withCredentials: true,
+                headers: {
+                    Authorization: 'Bearer ' + userToken
+                }
+            });
+    
+            console.log(data);
+            return data;
+        } catch (error) {
+            console.error('Error creating new thread:', error);
+            throw error; // You can handle or rethrow the error as needed
+        }
+    };
+
 
     return (
         <AuthContext.Provider value={{
@@ -104,7 +123,8 @@ const ContextProvider = (props) => {
             userToken,
             setUserToken,
             threadId,
-            setThreadId
+            setThreadId,
+            createNewThread,
         }}
         >
             {props.children}
