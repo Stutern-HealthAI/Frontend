@@ -11,6 +11,7 @@ import UpgradePlanModal from '../chatModal/UpgradePlanModal';
 import EndChatModal from '../chatModal/EndChatModal';
 import ChatBox from '../chatbox/ChatBox';
 import axios from 'axios';
+// import { useParams } from 'react-router-dom';
 
 function ChatInterface() {
 
@@ -23,9 +24,11 @@ function ChatInterface() {
     const [showBotMessage, setShowBotMessage] = useState(false)
     const [botMessage, setBotMessage] =  useState("")
 
-    const { showUpgrade, endChat, userToken, threadId } = useContext(AuthContext)
+    const { showUpgrade, endChat, userToken, threadId,  } = useContext(AuthContext)
 
     const chatBoxRef = useRef(null);
+
+    // const { thread_id } = useParams()
 
     // Function to scroll the chatbox to the bottom
     const scrollToBottom = () => {
@@ -96,6 +99,7 @@ function ChatInterface() {
             }
         }
     }
+    
 
 
     const mergedMessages = queryMessage.map((message, index) => ({

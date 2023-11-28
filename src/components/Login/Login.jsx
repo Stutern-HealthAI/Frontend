@@ -29,7 +29,9 @@ const Login = () => {
         isView,
         setEmail,
         setPassword,
-        setUserToken
+        setUserToken,
+        createNewThread, 
+        setThreadId
     } = useContext(AuthContext)
 
     const navigate = useNavigate()
@@ -48,40 +50,49 @@ const Login = () => {
 
 
     const handleLoginSubmit = async (e) => {
-        e.preventDefault()
-
+        e.preventDefault();
+    
         try {
-            const {data} = await axios.post('https://klus-hc.onrender.com/api/v1/users/login', {
+            const { data } = await axios.post('https://klus-hc.onrender.com/api/v1/users/login', {
                 email: email,
                 password: password
-            })
-
-            const { token } = data.data
-
-            console.log(token)
-            setUserToken(token)
-           
-
-            
-                console.log(data)
+            });
+    
+            const { token } = data.data;
+    
+            console.log(token);
+            setUserToken(token);
+    
+            console.log(data);
             // Handle the response 
             if (data.success === true) {
-                console.log("login successful");
-                // Perform actions after successful login
-                navigate('/newchat')
-                setEmail("")
-                setPassword("")
+                console.log("Login successful");
+    
+                // Create a new thread after successful login
+                try {
+                    const data = await createNewThread();
+
+                    const { thread_id } = data.data
+                    console.log("login", thread_id)
+                    setThreadId(thread_id)
+                    
+                    // Navigating to a new chat page after creating a thread
+                    navigate('/newchat');
+                    setEmail("");
+                    setPassword("");
+                } catch (threadErr) {
+                    console.error("Error creating thread:", threadErr);
+                    // Handle thread creation error if needed
+                }
             }
-            
+    
         } catch (err) {
-            // console.error('Error:', err)
-            console.error("Error: invalid credentials")
-            setShowText(true)
-            setEmail("")
-            setPassword("")
+            console.error("Error: Invalid credentials");
+            setShowText(true);
+            setEmail("");
+            setPassword("");
         }
-        
-    }
+    };
 
     
 

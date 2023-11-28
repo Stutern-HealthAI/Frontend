@@ -15,6 +15,7 @@ import SignUpVerification from './components/SignUp/SignUpVerification.jsx'
 import { ContextProvider } from './hooks/context.jsx'
 import NewChatPage from './pages/NewChatPage.jsx'
 
+
 const route = createBrowserRouter([
   {
     path: "/",

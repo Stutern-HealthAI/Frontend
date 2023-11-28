@@ -3,32 +3,33 @@ import { PiShareFat } from "react-icons/pi";
 import { MdDeleteOutline, MdOutlineSaveAlt } from "react-icons/md";
 import { RiChatNewLine, RiChatDeleteLine } from "react-icons/ri";
 import { AuthContext } from '../../hooks/context';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function ChatModal() {
 
-    const { setEndChat, userToken, setThreadId } = useContext(AuthContext)
+    const { setEndChat, userToken, setThreadId, createNewThread } = useContext(AuthContext)
 
     console.log('chatmodal', userToken)
 
+    const navigate = useNavigate()
+
     const openNewThread = async () => {
         try {
-            const {data} = await axios.post('https://klus-hc.onrender.com/api/v1/threads', {}, {
-                withCredentials: true,
-                headers: {
-                    Authorization: 'Bearer ' + userToken
-                }
-            })
+            const data = await createNewThread()
 
             const { thread_id } = data.data
 
-            console.log("thread id", thread_id);
+            // console.log("thread id", thread_id);
             setThreadId(thread_id)
 
                 console.log(data)
             // Handle the response 
             if (data.success === true) {
-                console.log("login successful");
+                console.log("create thread successful");
+                
+                //create new chat interface
+                navigate("/newchat");
                 
             }
             
