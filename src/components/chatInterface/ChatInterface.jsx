@@ -7,10 +7,11 @@ import { AuthContext } from '../../hooks/context';
 import SideBar from '../sidebar/SideBar';
 import ChatModal from '../chatModal/ChatModal';
 import ChatPattern from '../chatModal/ChatPattern';
-import UpgradePlanModal from '../chatModal/UpgradePlanModal';
 import EndChatModal from '../chatModal/EndChatModal';
 import ChatBox from '../chatbox/ChatBox';
+import UpgradePlanModal from '../upgradePlan/UpgradePlanModal'
 import axios from 'axios';
+import chatBot from '../../assets/chatBot.svg'
 // import { useParams } from 'react-router-dom';
 
 function ChatInterface() {
@@ -60,6 +61,13 @@ function ChatInterface() {
         setUserMessage(e.target.value)
     }
 
+    const submitFormOnEnter = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          onFormSubmit(event);
+        }
+    };
+
     const onFormSubmit = async (e) => {
         e.preventDefault()
 
@@ -81,7 +89,6 @@ function ChatInterface() {
                     }
                 )
                 //    console.log(data)
-                // Handle the response 
                 
                 if (data.success === true) {
                     const { content: message } = data.data.bot_message
@@ -119,21 +126,37 @@ function ChatInterface() {
             <SideBar />
             <div className="h-[74dvh] rounded-b-2xl flex flex-col-reverse overflow-auto scroll-smooth">
                 <div className="w-[90%] mx-auto min-h-[5rem] overflow-y-auto scrollbar-hide" ref={chatBoxRef}>
-                    
+                    <div className="flex flex-col w-2/6">
+                        <img src={chatBot} alt="chat bot" className="w-80 h-80" />
+                        <ChatBox
+                            style={{ backgroundColor: "#AEC0C0" }}
+                            queryMessage={"Hey there!!!"}
+                            alias={"AI"}
+                            floatStyle={{float: "left", width: "20rem"}}
+                        />
+                        <ChatBox
+                            style={{ backgroundColor: "#AEC0C0" }}
+                            queryMessage={"Welcome to Health AI. I am your personal chatbot. How may I help you today?"}
+                            alias={"AI"}
+                            floatStyle={{float: "left"}}
+                        />
+                    </div>
                     {mergedMessages.map((mergedItem, index) => (
                         <div key={index}>
                             <ChatBox
                             style={{ backgroundColor: "#079393"}}
                             queryMessage={mergedItem.queryMessage}
                             alias={"ME"}
-                            floatStyle={{float: "right", flexDirection: "row-reverse"}}
+                            floatStyle={{float: "right", flexDirection: "row-reverse", width: "80%"}}
+                            
                             />
                             {mergedItem.responseMessage && (
                                 <ChatBox
                                 style={{ backgroundColor: "#AEC0C0" }}
                                 queryMessage={mergedItem.responseMessage}
                                 alias={"AI"}
-                                floatStyle={{float: "left"}}
+                                floatStyle={{float: "left", width: "80%"}}
+                               
                                 />
                             )}
                         </div>
@@ -152,7 +175,7 @@ function ChatInterface() {
 
             {openChat && <ChatModal />}
 
-            {showUpgrade && <UpgradePlanModal />}
+            {showUpgrade && <UpgradePlanModal /> }
 
             {endChat && <EndChatModal />}
 
@@ -162,10 +185,12 @@ function ChatInterface() {
                 <div className="flex items-center justify-evenly border border-[#0F2424] rounded-xl w-[90dvw] p-4 m-auto">
                     <form onSubmit={onFormSubmit} className="flex items-center w-full">
                         <textarea type="text"
+                            id="form-textarea"
                             placeholder="Type message here"
                             value={userMessage}
                             onChange={captureMessageChange}
-                            className="text-2xl h-fit p-1 bg-transparent outline-0 w-full resize-none overflow-y-auto scrollbar-hide "
+                            onKeyDown={submitFormOnEnter}
+                            className="text-2xl h-fit p-1 bg-transparent outline-0 w-full resize-none overflow-y-auto scrollbar-hide break-keep "
                         ></textarea>
                         <button type="submit" className="text-[#00A3B5] text-4xl outline-0 "
                         >

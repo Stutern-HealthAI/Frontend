@@ -4,6 +4,7 @@ import bgdatom from '../../assets/abstract-bgd-atom.png'
 import { AuthContext } from '../../hooks/context'
 import profilePhoto from '../../assets/userProfilePhoto.svg'
 import { Link } from 'react-router-dom'
+import { TbMoneybag } from "react-icons/tb";
 import { AiOutlineEye, AiOutlineDownload, AiOutlineSetting, AiOutlinePoweroff } from "react-icons/ai";
 
 function SideBar() {
@@ -48,6 +49,12 @@ function SideBar() {
                 <li className="flex text-3xl gap-4 items-center mb-4">
                     <AiOutlineSetting />
                     <p>Settings</p>
+                </li>
+            </Link>
+            <Link to={"/"}>
+                <li className="flex text-3xl gap-4 items-center mb-4">
+                    <TbMoneybag />
+                    <p>Refer and Earn</p>
                 </li>
             </Link>
         </ul>

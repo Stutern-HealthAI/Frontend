@@ -13,7 +13,7 @@ const NavBar = () => {
 
     return (
         <>
-            <nav className="flex justify-between items-center p-4 "> {/*fixed w-screen z-50*/} 
+            <nav className="flex justify-between items-center py-4 px-16 "> {/*fixed w-screen z-50*/} 
                 <Link to={'/'}><div className="flex items-baseline">
                     <img src={logo} alt="app logo" />
                     <h1 className="text-4xl font-bold">Health AI</h1>

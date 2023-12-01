@@ -14,6 +14,9 @@ import SignUpForm from './components/SignUp/SignUpForm.jsx'
 import SignUpVerification from './components/SignUp/SignUpVerification.jsx'
 import { ContextProvider } from './hooks/context.jsx'
 import NewChatPage from './pages/NewChatPage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import PricingPage from './pages/PricingPage.jsx'
+import PaymentPage from './pages/PaymentPage.jsx'
 
 
 const route = createBrowserRouter([
@@ -29,6 +32,18 @@ const route = createBrowserRouter([
       {
         path: "/newchat",
         element: <NewChatPage />
+      },
+      {
+        path: "/about",
+        element: <AboutPage />
+      },
+      {
+        path: "/pricing",
+        element: <PricingPage />
+      },
+      {
+        path: "/payment",
+        element: <PaymentPage />
       }
     ]
   },

@@ -53,7 +53,7 @@ function SignUpForm() {
                 console.log("Sign up successful");
                 // Perform actions after successful login
                 navigate('/signup/verifyaccount')
-                setEmail("")
+                // setEmail("")
                 setPassword("")
                 setUserFullName("")
             }

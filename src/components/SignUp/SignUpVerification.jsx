@@ -23,6 +23,10 @@ function SignUpVerification() {
             />
         </form>
 
+        <Link to={'/login'}>
+            <button className="border  w-full p-3 rounded-3xl text-{#040308} font-bold text-2xl mt-8 cursor-pointer">Go to login</button>
+        </Link>
+
     </section>
   )
 }
