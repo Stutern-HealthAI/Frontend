@@ -25,7 +25,7 @@ const HeroSection = () => {
                             Chat now
                         </button>
                     </Link>
-                    <Link to="#">
+                    <Link to="/about">
                         <button className="rounded-lg border-4 border-[#0F2424] p-2 text-3xl w-60 h-16">
                             Learn more
                         </button>

@@ -160,7 +160,7 @@ const Login = () => {
                             type="submit" 
                             name="submit" 
                             value="Log In"
-                            className="border bg-[#579191] w-full p-3 rounded-xl text-white font-medium text-2xl mt-16 cursor-pointer"
+                            className="border bg-[#579191] w-full p-3 rounded-xl text-white font-medium text-2xl mt-16 cursor-pointer hover:scale-105 active:cursor-progress"
                         />
                     </form>
 

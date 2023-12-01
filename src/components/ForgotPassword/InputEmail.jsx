@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { AuthContext } from '../../hooks/context';
 
 function inputEmail() {
 
+  const { email, getEmailValue } = useContext(AuthContext)
+
   const navigate = useNavigate();
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
 
-    navigate("/forgotpassword/sent")
+    try {
+      const { data } = await axios.post("https://klus-hc.onrender.com/api/v1/users/forgot_password", {
+        email: email
+      })
+
+      if (data.success === true) {
+        console.log("Email sent successful")
+        navigate("/forgotpassword/sent")
+        // setEmail("")
+      }
+    } catch (error) {
+      console.error("Email does not exist, sign up!")
+    }
+
+    
   }
 
   return (
@@ -22,6 +40,8 @@ function inputEmail() {
             <input type="email" 
                 name="email" 
                 placeholder="Email"
+                value={email}
+                onChange={getEmailValue}
                 className="w-full p-4 outline-0 border rounded-xl text-{#040308} font-medium text-2xl"
             />
             <input 
