@@ -48,7 +48,7 @@ function ChatModal() {
         <div className="bg-[#00A3B5] w-[15%] h-[40%] absolute right-[6.5%] top-[20%] rounded-2xl ease-in-out duration-500">
             <div className="flex items-center gap-3 text-3xl text-white m-3 p-4 cursor-pointer hover:scale-105">
                 <RiChatNewLine />
-                <p onClick={openNewThread} >New chat</p>
+                <p onClick={openNewThread}>New chat</p>
             </div>
             <div className="flex items-center gap-3 text-3xl text-white m-3 p-4 cursor-pointer hover:scale-105">
                 <PiShareFat />
