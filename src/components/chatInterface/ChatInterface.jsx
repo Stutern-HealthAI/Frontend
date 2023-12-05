@@ -27,6 +27,8 @@ function ChatInterface() {
 
     const { showUpgrade, endChat, userToken, threadId,  } = useContext(AuthContext)
 
+    const apiUrl = import.meta.env.VITE_BASE_URL
+
     const chatBoxRef = useRef(null);
 
     // const { thread_id } = useParams()
@@ -78,7 +80,7 @@ function ChatInterface() {
 
             
             try {
-                const {data} = await axios.post('https://klus-hc.onrender.com/api/v1/messages', {
+                const {data} = await axios.post(`${apiUrl}/messages`, {
                     user_message: userMessage,
                     thread_id: threadId
                     },

@@ -31,7 +31,7 @@ const route = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "/newchat",
+        path: "/newchat/:id",
         element: <NewChatPage />
       },
       {

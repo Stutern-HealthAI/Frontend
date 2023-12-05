@@ -70,7 +70,41 @@ function PricingPlan() {
                             Access to online doctor
                         </li>
                     </ul>
-                    <p className="text-2xl font-bold my-10">₦5,000</p>
+                    <p className="text-2xl font-bold my-10">₦750 per month</p>
+                    <Link to={'/payment'}>
+                        <button className="border-0 bg-[#079393] text-white font-bold text-2xl outline-0 w-full p-4 rounded hover:scale-105 ">pay now</button>
+                    </Link>
+                </div>
+
+                <div className="border-2 border-[#AEC0C0] rounded-2xl p-8 h-[40rem] w-[32rem]">
+                    <h3 className="text-3xl my-16 font-bold">Premium plan</h3>
+                    <ul className="text-left text-2xl leading-10 my-8">
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to text to text chat
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to voice to text chat
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to text to voice chat
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to voice to voice chat
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to both text and voice chat
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <TbArrowBadgeRightFilled />
+                            Access to online doctor
+                        </li>
+                    </ul>
+                    <p className="text-2xl font-bold my-10">₦5,000 per year</p>
                     <Link to={'/payment'}>
                         <button className="border-0 bg-[#079393] text-white font-bold text-2xl outline-0 w-full p-4 rounded hover:scale-105 ">pay now</button>
                     </Link>

@@ -7,13 +7,14 @@ function inputEmail() {
 
   const { email, getEmailValue } = useContext(AuthContext)
 
+  const apiUrl = import.meta.env.VITE_BASE_URL
   const navigate = useNavigate();
 
   const submitForm = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("https://klus-hc.onrender.com/api/v1/users/forgot_password", {
+      const { data } = await axios.post(`${apiUrl}/users/forgot_password`, {
         email: email
       })
 

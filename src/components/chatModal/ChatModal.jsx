@@ -29,7 +29,7 @@ function ChatModal() {
                 console.log("create thread successful");
                 
                 //create new chat interface
-                navigate("/newchat");
+                navigate(`/newchat/${thread_id}`);
                 
             }
             

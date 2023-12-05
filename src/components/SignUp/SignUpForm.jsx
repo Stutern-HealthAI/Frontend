@@ -10,6 +10,8 @@ import GoogleAndFacebook from '../common/GoogleAndFacebook';
 
 function SignUpForm() {
     const [showText, setShowText] = useState(false)
+
+    const apiUrl = import.meta.env.VITE_BASE_URL
     const {
         email,
         password,
@@ -41,7 +43,7 @@ function SignUpForm() {
         e.preventDefault()
 
         try {
-            const {data} = await axios.post('https://klus-hc.onrender.com/api/v1/users', {
+            const {data} = await axios.post(`${apiUrl}/users`, {
                 email: email,
                 password: password,
                 full_name: userFullName
