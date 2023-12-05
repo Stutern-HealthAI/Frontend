@@ -4,6 +4,12 @@ import axios from "axios"
 const AuthContext = createContext()
 
 const ContextProvider = (props) => {
+    const initialState = () => {
+        const value = "english"
+        return value
+    }
+
+    //states for user data
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isView, setIsView] = useState(false);
     const [email, setEmail] = useState("")
@@ -13,6 +19,9 @@ const ContextProvider = (props) => {
     const [endChat, setEndChat] = useState(false)
     const [userToken, setUserToken] = useState("")
     const [threadId, setThreadId] = useState("")
+    const [selectLang, setSelectLang] = useState(initialState)
+
+    const apiUrl = import.meta.env.VITE_BASE_URL
 
     useEffect(() => {
         if (showUpgrade === true) {
@@ -72,7 +81,29 @@ const ContextProvider = (props) => {
         }
     }
 
+    //open pop up
+    const openChatPopUp = () => {
+        const chatPopUpElement = document.getElementById("chatPopUp");
+        if (chatPopUpElement) {
+            
+            chatPopUpElement.style.visibility = "visible";
+        }
+    }
+
+    //get select value
+    const getSelectValue = (e) => {
+        setSelectLang(e.target.value)
+    }
+
     //close side nav
+    const closeChatPopUp = () => {
+        const chatPopUpElement = document.getElementById("chatPopUp");
+        if (chatPopUpElement) {
+            chatPopUpElement.style.visibility = "hidden";
+        }
+    }
+
+    //close pop up
     const closeSideNav = () => {
         const sideBarElement = document.getElementById("sideBar");
         if (sideBarElement) {
@@ -82,7 +113,7 @@ const ContextProvider = (props) => {
 
     const createNewThread = async () => {
         try {
-            const { data } = await axios.post('https://klus-hc.onrender.com/api/v1/threads', {}, {
+            const { data } = await axios.post(`${apiUrl}/threads`, {}, {
                 withCredentials: true,
                 headers: {
                     Authorization: 'Bearer ' + userToken
@@ -125,6 +156,11 @@ const ContextProvider = (props) => {
             threadId,
             setThreadId,
             createNewThread,
+            selectLang,
+            setSelectLang,
+            getSelectValue,
+            openChatPopUp,
+            closeChatPopUp
         }}
         >
             {props.children}

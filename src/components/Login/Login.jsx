@@ -20,6 +20,8 @@ import AppLogo from '../common/AppLogo';
 const Login = () => {
     const [showText, setShowText] = useState(false)
     
+    const apiUrl = import.meta.env.VITE_BASE_URL
+    
     const {
         email,
         password,
@@ -53,7 +55,7 @@ const Login = () => {
         e.preventDefault();
     
         try {
-            const { data } = await axios.post('https://klus-hc.onrender.com/api/v1/users/login', {
+            const { data } = await axios.post(`${apiUrl}/users/login`, {
                 email: email,
                 password: password
             });
@@ -77,7 +79,7 @@ const Login = () => {
                     setThreadId(thread_id)
                     
                     // Navigating to a new chat page after creating a thread
-                    navigate('/newchat');
+                    navigate(`/newchat/${thread_id}`);
                     setEmail("");
                     setPassword("");
                 } catch (threadErr) {
@@ -160,7 +162,7 @@ const Login = () => {
                             type="submit" 
                             name="submit" 
                             value="Log In"
-                            className="border bg-[#579191] w-full p-3 rounded-xl text-white font-medium text-2xl mt-16 cursor-pointer"
+                            className="border bg-[#579191] w-full p-3 rounded-xl text-white font-medium text-2xl mt-16 cursor-pointer hover:scale-105 active:cursor-progress"
                         />
                     </form>
 
