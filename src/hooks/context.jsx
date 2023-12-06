@@ -20,6 +20,7 @@ const ContextProvider = (props) => {
     const [userToken, setUserToken] = useState("")
     const [threadId, setThreadId] = useState("")
     const [selectLang, setSelectLang] = useState(initialState)
+    const [togglePopUp, setTogglePopUp] = useState(false)
 
     const apiUrl = import.meta.env.VITE_BASE_URL
 
@@ -85,9 +86,12 @@ const ContextProvider = (props) => {
     const openChatPopUp = () => {
         const chatPopUpElement = document.getElementById("chatPopUp");
         if (chatPopUpElement) {
-            
             chatPopUpElement.style.visibility = "visible";
+
+               
         }
+        setTogglePopUp(true)
+        console.log("open") 
     }
 
     //get select value
@@ -99,8 +103,12 @@ const ContextProvider = (props) => {
     const closeChatPopUp = () => {
         const chatPopUpElement = document.getElementById("chatPopUp");
         if (chatPopUpElement) {
-            chatPopUpElement.style.visibility = "hidden";
+            chatPopUpElement.style.visibility = "hidden";     
         }
+        
+        setTogglePopUp(false);
+
+        console.log("close")  
     }
 
     //close pop up
@@ -131,36 +139,22 @@ const ContextProvider = (props) => {
 
     return (
         <AuthContext.Provider value={{
-            isLoggedIn,
-            setIsLoggedIn,
-            getEmailValue,
-            getPasswordValue,
-            isView,
-            setIsView,
-            viewPassword,
-            email,
-            password,
-            userFullName,
-            setEmail,
-            setPassword,
-            setUserFullName,
-            getFullNameValue,
-            openSideNav,
-            closeSideNav,
-            showUpgrade,
-            setShowUpgrade,
-            endChat,
-            setEndChat,
-            userToken,
-            setUserToken,
-            threadId,
-            setThreadId,
-            createNewThread,
-            selectLang,
-            setSelectLang,
-            getSelectValue,
-            openChatPopUp,
-            closeChatPopUp
+            isLoggedIn, setIsLoggedIn,
+            getEmailValue, getPasswordValue,
+            isView, setIsView,
+            viewPassword, email,
+            password, userFullName,
+            setEmail, setPassword,
+            setUserFullName, getFullNameValue,
+            openSideNav, closeSideNav,
+            showUpgrade, setShowUpgrade,
+            endChat, setEndChat,
+            userToken, setUserToken,
+            threadId, setThreadId,
+            createNewThread, selectLang,
+            setSelectLang, getSelectValue,
+            openChatPopUp, closeChatPopUp,
+            togglePopUp, setTogglePopUp
         }}
         >
             {props.children}
